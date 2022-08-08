@@ -1,3 +1,4 @@
+#!/bin/bash
 check_code()
 {
     if [ "$1" -ne 0 ]

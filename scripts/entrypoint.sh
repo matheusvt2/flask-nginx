@@ -22,7 +22,13 @@ then
 elif [ "$OPTION" = 'flask' ]
 then
     nginx -g "daemon off;" &
-    exec uwsgi --pp app/ --socket 0.0.0.0:$PORT --protocol=http -w wsgi:app
+    if [ -z "$FILE" ]
+    then
+        echo "Empty app... using default (app)"
+        exec uwsgi --pp app/flask/ --socket 0.0.0.0:$PORT --protocol=http -w wsgi:app
+    else
+         exec uwsgi --pp app/flask/ --socket 0.0.0.0:$PORT --protocol=http -w wsgi:$FILE
+    fi
 elif [ "$OPTION" = 'bash' ]
 then
     exec bash
