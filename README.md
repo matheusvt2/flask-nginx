@@ -47,7 +47,7 @@ A pasta `certs`contém os certificados utilizados pelo NGINX caso o usuário nã
 
 As configurações do NGINX estão na pasta `conf`.
 
-Na pasta `scripts` temos códigos em `shell script` que auxiliam no Dockerfile.
+Na pasta `scripts` temos códigos em `shell script` usados pelo Dockerfile.
 
 ## Utilização
 
@@ -63,6 +63,7 @@ docker build . --tag minhaimagemnginx
 ```
 
 ---
+
 ### Flask
 
 ```bash
@@ -74,6 +75,7 @@ docker run -p 443:443 -p 8080:80 --rm -it minhaimagemnginx flask meuprojeto
 ```
 
 ---
+
 ### Streamlit
 
 ```bash
@@ -90,8 +92,8 @@ docker run -p 443:443 -p 8080:80 --rm -it minhaimagemnginx streamlit app/streaml
 ```
 
 ---
-### Bash
 
+### Bash
 
 ```bash
 # Executa o bash dentro do container.
