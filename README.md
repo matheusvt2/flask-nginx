@@ -1,10 +1,14 @@
 # Criação de um container Nginx com app em SSL
 
-Neste projeto estamos configurando o Nginx como um proxy reverso para uma aplicação em python, podendo ser ela em Flask ou Streamlit.
+Neste projeto vamos configurar o **NGINX como um proxy reverso** para uma aplicação em python, podendo ser ela em **Flask** ou **Streamlit**.
 
-Este é apenas um exemplo a fim de entendimento da solução e não é um projeto produtivo.
+Este é apenas um exemplo a fim de entendimento e não é um projeto produtivo.
 
-### Entendendo o diretório
+## Arquitetura
+
+![Imagem](docs/imgs/nginx-sl-flask.png)
+
+## Entendendo o diretório
 
 ```text
 .
@@ -50,6 +54,7 @@ Na pasta `scripts` temos códigos em `shell script` que auxiliam no Dockerfile.
 Comandos básicos.
 
 ### Build
+
 Necessário estar na raíz do diretório:
 
 ```bash
@@ -57,6 +62,7 @@ Necessário estar na raíz do diretório:
 docker build . --tag minhaimagemnginx
 ```
 
+---
 ### Flask
 
 ```bash
@@ -67,6 +73,7 @@ docker run -p 443:443 -p 8080:80 --rm -it minhaimagemnginx flask
 docker run -p 443:443 -p 8080:80 --rm -it minhaimagemnginx flask meuprojeto
 ```
 
+---
 ### Streamlit
 
 ```bash
@@ -82,15 +89,14 @@ docker run -p 443:443 -p 8080:80 --rm -it minhaimagemnginx streamlit <caminho/ar
 docker run -p 443:443 -p 8080:80 --rm -it minhaimagemnginx streamlit app/streamlit/streamlit.py
 ```
 
+---
 ### Bash
+
 
 ```bash
 # Executa o bash dentro do container.
 docker run --rm -it minhaimagemnginx bash
 ```
-
-uwsgi --pp app/ --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
-streamlit hello--server.enableCORS false --server.port 5000
 
 #### Utils
 
@@ -105,7 +111,7 @@ nginx && streamlit hello --server.enableCORS true --server.port 5000
 nginx && uwsgi --pp app/ --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
 ```
 
-### Referências
+## Referências
 
 - [Flask Hello World](https://pythonbasics.org/flask-tutorial-hello-world/)
 - [UWSGI Docs](https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html)
