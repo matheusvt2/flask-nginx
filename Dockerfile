@@ -1,5 +1,4 @@
 FROM amazonlinux:latest
-
 # Copy files to container
 ADD . /app
 
@@ -22,16 +21,16 @@ RUN  python3 -m pip install -r requirements.txt
 
 # Generate a self-signed certificate on docker build. Comment this if uncomment above lines.
 # Change  the value of SUBJ 
-ARG SUBJ "/C=BR/ST=SP/L=SaoPaulo/O=My app LTDA/OU=IT/CN=localhost"
-RUN ["chmod", "+x", "/app/scripts/createcert.sh"]
-RUN ["/bin/bash", "-c", "/app/scripts/createcert.sh", "$SUBJ"]
+ARG SUBJ="/C=BR/ST=SP/L=SaoPaulo/O=My app LTDA/OU=IT/CN=localhost"
+RUN chmod +x /app/scripts/createcert.sh
+RUN /app/scripts/createcert.sh "$SUBJ"
 
 # Configure nginx
 # Change nginx/nginx.conf accordingly with your projetc
-RUN ["mkdir", " -p ", "/etc/nginx/snippets"]
-RUN ["cp", "-r", "conf/nginx/snippets", "/etc/nginx/"]
-RUN ["cp", "conf/nginx/nginx.conf", "/etc/nginx/nginx.conf"]
+RUN mkdir -p /etc/nginx/snippets
+RUN cp -r conf/nginx/snippets /etc/nginx/
+RUN cp conf/nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Entrypoint file. Comment this lines if you don't want to start nginx.
-RUN ["chmod", "+x", "/app/scripts/entrypoint.sh"]
+RUN chmod +x /app/scripts/entrypoint.sh
 ENTRYPOINT  ["/app/scripts/entrypoint.sh"]
